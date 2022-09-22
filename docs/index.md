@@ -1,316 +1,304 @@
 ---
 layout: default
-title: Markdown kitchen sink
-nav_order: 99
+title: Navigation Structure
+nav_order: 5
 ---
 
-<button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
+# Navigation Structure
+{: .no_toc }
 
-<script>
-const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 
-jtd.addEvent(toggleDarkMode, 'click', function(){
-  if (jtd.getTheme() === 'dark') {
-    jtd.setTheme('light');
-    toggleDarkMode.textContent = 'Preview dark color scheme';
-  } else {
-    jtd.setTheme('dark');
-    toggleDarkMode.textContent = 'Return to the light side';
-  }
-});
-</script>
+---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+## Main navigation
 
-[Link to another page](another-page).
+The main navigation for your Just the Docs site is on the left side of the page at large screens and on the top (behind a tap) on small screens. The main navigation can be structured to accommodate a multi-level menu system (pages with children and grandchildren).
 
-There should be whitespace between paragraphs.
+By default, all pages will appear as top level pages in the main nav unless a parent page is defined (see [Pages with Children](#pages-with-children)).
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+---
 
-# [](#header-1)Header 1
+## Ordering pages
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+To specify a page order, you can use the `nav_order` parameter in your pages' YAML front matter.
 
-## [](#header-2)Header 2
+#### Example
+{: .no_toc }
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
+```yaml
+---
+layout: default
+title: Customization
+nav_order: 4
+---
 
-### [](#header-3)Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
 ```
 
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
+The parameter values determine the order of the top-level pages, and of child pages with the same parent. You can reuse the same parameter values (e.g., integers starting from 1) for the child pages of different parents.
 
-#### [](#header-4)Header 4 `with code not transformed`
+The parameter values can be numbers (integers, floats) and/or strings. When you omit `nav_order` parameters, they default to the titles of the pages, which are ordered alphabetically. Pages with numerical `nav_order` parameters always come before those with strings or default `nav_order` parameters. If you want to make the page order independent of the page titles, you can set explicit `nav_order` parameters on all pages.
 
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
+By default, all Capital letters come before all lowercase letters; you can add `nav_sort: case_insensitive` in the configuration file to ignore the case. Enclosing strings in quotation marks is optional.
 
-##### [](#header-5)Header 5
+> _Note for users of previous versions:_ `nav_sort: case_insensitive` previously affected the ordering of numerical `nav_order` parameters: e.g., `10` came before `2`. Also, all pages with explicit `nav_order` parameters previously came before all pages with default parameters. Both were potentially confusing, and they have now been eliminated.
 
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
+---
 
-###### [](#header-6)Header 6
+## Excluding pages
 
-[This is a very long link which wraps and therefore doesn't overflow
-even when it comes at the beginning](.) of the line.
+For specific pages that you do not wish to include in the main navigation, e.g. a 404 page or a landing page, use the `nav_exclude: true` parameter in the YAML front matter for that page.
 
-- [This is a very long link which wraps and therefore doesn't overflow the line
-  when used first in an item ](.) in a list.
+#### Example
+{: .no_toc }
 
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And an ordered list, continued:
-
-1.  Item one
-1.  Item two
-
-Some text
-
-{:style="counter-reset:none"}
-1.  Item three
-1.  Item four
-
-### And an ordered list starting from 42:
-
-{:style="counter-reset:step-counter 41"}
-1.  Item 42
-1.  Item 43
-1.  Item 44
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Nesting an ol in ul in an ol
-
-- level 1 item (ul)
-  1. level 2 item (ol)
-  1. level 2 item (ol)
-    - level 3 item (ul)
-    - level 3 item (ul)
-- level 1 item (ul)
-  1. level 2 item (ol)
-  1. level 2 item (ol)
-    - level 3 item (ul)
-    - level 3 item (ul)
-  1. level 4 item (ol)
-  1. level 4 item (ol)
-    - level 3 item (ul)
-    - level 3 item (ul)
-- level 1 item (ul)
-
-### And a task list
-
-- [ ] Hello, this is a TODO item
-- [ ] Hello, this is another TODO item
-- [x] Goodbye, this item is done
-
-### Nesting task lists
-
-- [ ] level 1 item (task)
-   - [ ] level 2 item (task)
-   - [ ] level 2 item (task)
-- [ ] level 1 item (task)
-- [ ] level 1 item (task)
-
-### Nesting a ul in a task list
-
-- [ ] level 1 item (task)
-   - level 2 item (ul)
-   - level 2 item (ul)
-- [ ] level 1 item (task)
-- [ ] level 1 item (task)
-
-### Nesting a task list in a ul
-
-- level 1 item (ul)
-   - [ ] level 2 item (task)
-   - [ ] level 2 item (task)
-- level 1 item (ul)
-- level 1 item (ul)
-
-### Small image
-
-![](../../assets/images/small-image.jpg)
-
-### Large image
-
-![](../../assets/images/large-image.jpg)
-
-"[Wroclaw University Library digitizing rare archival texts](https://www.flickr.com/photos/97810305@N08/9401451269)" by [j_cadmus](https://www.flickr.com/photos/97810305@N08) is marked with [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/?ref=openverse).
-
-### Labels
-
-I'm a label
-{: .label }
-
-blue
-{: .label .label-blue }
-green
-{: .label .label-green }
-purple
-{: .label .label-purple }
-yellow
-{: .label .label-yellow }
-red
-{: .label .label-red }
-
-**bold**
-{: .label }
-*italic*
-{: .label }
-***bold + italic***
-{: .label }
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-#### Multiple description terms and values
-
-Term
-: Brief description of Term
-
-Longer Term
-: Longer description of Term,
-  possibly more than one line
-
-Term
-: First description of Term,
-  possibly more than one line
-
-: Second description of Term,
-  possibly more than one line
-
-Term1
-Term2
-: Single description of Term1 and Term2,
-  possibly more than one line
-
-Term1
-Term2
-: First description of Term1 and Term2,
-  possibly more than one line
-
-: Second description of Term1 and Term2,
-  possibly more than one line
-
-### More code
-
-```python{% raw %}
-def dump_args(func):
-    "This decorator dumps out the arguments passed to a function before calling it"
-    argnames = func.func_code.co_varnames[:func.func_code.co_argcount]
-    fname = func.func_name
-    def echo_func(*args,**kwargs):
-        print fname, ":", ', '.join(
-            '%s=%r' % entry
-            for entry in zip(argnames,args) + kwargs.items())
-        return func(*args, **kwargs)
-    return echo_func
-
-@dump_args
-def f1(a,b,c):
-    print a + b + c
-
-f1(1, 2, 3)
-
-def precondition(precondition, use_conditions=DEFAULT_ON):
-    return conditions(precondition, None, use_conditions)
-
-def postcondition(postcondition, use_conditions=DEFAULT_ON):
-    return conditions(None, postcondition, use_conditions)
-
-class conditions(object):
-    __slots__ = ('__precondition', '__postcondition')
-
-    def __init__(self, pre, post, use_conditions=DEFAULT_ON):
-        if not use_conditions:
-            pre, post = None, None
-
-        self.__precondition  = pre
-        self.__postcondition = post
-{% endraw %}```
+```yaml
+---
+layout: default
+title: 404
+nav_exclude: true
+---
 
 ```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
 
-### Mermaid Diagrams
+The `nav_exclude` parameter does not affect the [auto-generating list of child pages](#auto-generating-table-of-contents), which you can use to access pages excluded from the main navigation.
 
-The following code is displayed as a diagram only when a `mermaid` key supplied in `_config.yml`.
+Pages with no `title` are automatically excluded from the navigation.
 
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
+---
 
+## Pages with children
+
+Sometimes you will want to create a page with many children (a section). First, it is recommended that you keep pages that are related in a directory together... For example, in these docs, we keep all of the written documentation in the `./docs` directory and each of the sections in subdirectories like `./docs/ui-components` and `./docs/utilities`. This gives us an organization like:
 
 ```
-The final element.
++-- ..
+|-- (Jekyll files)
+|
+|-- docs
+|   |-- ui-components
+|   |   |-- index.md  (parent page)
+|   |   |-- buttons.md
+|   |   |-- code.md
+|   |   |-- labels.md
+|   |   |-- tables.md
+|   |   +-- typography.md
+|   |
+|   |-- utilities
+|   |   |-- index.md      (parent page)
+|   |   |-- color.md
+|   |   |-- layout.md
+|   |   |-- responsive-modifiers.md
+|   |   +-- typography.md
+|   |
+|   |-- (other md files, pages with no children)
+|   +-- ..
+|
+|-- (Jekyll files)
++-- ..
 ```
+
+On the parent pages, add this YAML front matter parameter:
+
+- `has_children: true` (tells us that this is a parent page)
+
+#### Example
+{: .no_toc }
+
+```yaml
+---
+layout: default
+title: UI Components
+nav_order: 2
+has_children: true
+---
+
+```
+
+Here we're setting up the UI Components landing page that is available at `/docs/ui-components`, which has children and is ordered second in the main nav.
+
+### Child pages
+
+{: .text-gamma }
+
+On child pages, simply set the `parent:` YAML front matter to whatever the parent's page title is and set a nav order (this number is now scoped within the section).
+
+#### Example
+{: .no_toc }
+
+```yaml
+---
+layout: default
+title: Buttons
+parent: UI Components
+nav_order: 2
+---
+
+```
+
+The Buttons page appears as a child of UI Components and appears second in the UI Components section.
+
+### Ordering child pages
+
+You can optionally add the following to the YAML front matter to change the default sort order of child pages from ascending to descending order:
+
+- `child_nav_order: desc`
+
+#### Example
+{: .no_toc }
+```yaml
+---
+layout: default
+title: Descending Child Pages
+child_nav_order: desc
+---
+```
+
+### Auto-generating Table of Contents
+
+By default, all pages with children will automatically append a Table of Contents which lists the child pages after the parent page's content. To disable this auto Table of Contents, set `has_toc: false` in the parent page's YAML front matter.
+
+#### Example
+{: .no_toc }
+
+```yaml
+---
+layout: default
+title: UI Components
+nav_order: 2
+has_children: true
+has_toc: false
+---
+
+```
+
+### Children with children
+
+{: .text-gamma }
+
+Child pages can also have children (grandchildren). This is achieved by using a similar pattern on the child and grandchild pages.
+
+1. Add the `has_children` attribute to the child
+1. Add the `parent` and `grand_parent` attribute to the grandchild
+
+#### Example
+{: .no_toc }
+
+```yaml
+---
+layout: default
+title: Buttons
+parent: UI Components
+nav_order: 2
+has_children: true
+---
+
+```
+
+```yaml
+---
+layout: default
+title: Buttons Child Page
+parent: Buttons
+grand_parent: UI Components
+nav_order: 1
+---
+
+```
+
+This would create the following navigation structure:
+
+```
++-- ..
+|
+|-- UI Components
+|   |-- ..
+|   |
+|   |-- Buttons
+|   |   |-- Button Child Page
+|   |
+|   |-- ..
+|
++-- ..
+```
+
+---
+
+## Auxiliary Links
+
+To add auxiliary links to your site (in the upper right on all pages), add it to the `aux_links` [configuration option]({{ site.baseurl }}{% link docs/configuration.md %}#aux-links) in your site's `_config.yml` file.
+
+#### Example
+{: .no_toc }
+
+```yaml
+# Aux links for the upper right navigation
+aux_links:
+  "Just the Docs on GitHub":
+    - "//github.com/just-the-docs/just-the-docs"
+```
+
+---
+
+## External Navigation Links
+
+To add external links to the navigation, add them to the `nav_external_links` [configuration]({{ site.baseurl }}{% link docs/configuration.md %}) option in your site's `_config.yml` file.
+External links will appear under all other items in the listing order.
+
+#### Example
+
+{: .no_toc }
+
+```yaml
+# External navigation links
+nav_external_links:
+  - title: Just the Docs on GitHub
+    url: https://github.com/just-the-docs/just-the-docs
+    hide_icon: false # set to true to hide the external link icon - defaults to false
+```
+
+---
+
+## In-page navigation with Table of Contents
+
+To generate a Table of Contents on your docs pages, you can use the `{:toc}` method from Kramdown, immediately after an `<ol>` in Markdown. This will automatically generate an ordered list of anchor links to various sections of the page based on headings and heading levels. There may be occasions where you're using a heading and you don't want it to show up in the TOC, so to skip a particular heading use the `{: .no_toc }` CSS class.
+
+#### Example
+{: .no_toc }
+
+```markdown
+# Navigation Structure
+{: .no_toc }
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+```
+
+This example skips the page name heading (`#`) from the TOC, as well as the heading for the Table of Contents itself (`##`) because it is redundant, followed by the table of contents itself. To get an unordered list, replace `1. TOC` above by `- TOC`.
+
+### Collapsible Table of Contents
+
+The Table of Contents can be made collapsible using the `<details>` and `<summary>` elements , as in the following example. The attribute `open` (expands the Table of Contents by default) and the styling with `{: .text-delta }` are optional.
+
+```markdown
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
+```
+
+The result is shown at [the top of this page](#navigation-structure) (`{:toc}` can be used only once on each page).
