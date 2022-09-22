@@ -1,1 +1,8 @@
+title: GoWiFi Devs
+description: A GoWiFi documentation
+
 remote_theme: just-the-docs/just-the-docs
+
+heading_anchors: true
+
+
