@@ -231,27 +231,6 @@ This would create the following navigation structure:
 
 ---
 
-## Auxiliary Links
-
-To add auxiliary links to your site (in the upper right on all pages), add it to the `aux_links` [configuration option]({{ site.baseurl }}{% link docs/configuration.md %}#aux-links) in your site's `_config.yml` file.
-
-#### Example
-{: .no_toc }
-
-```yaml
-# Aux links for the upper right navigation
-aux_links:
-  "Just the Docs on GitHub":
-    - "//github.com/just-the-docs/just-the-docs"
-```
-
----
-
-## External Navigation Links
-
-To add external links to the navigation, add them to the `nav_external_links` [configuration]({{ site.baseurl }}{% link docs/configuration.md %}) option in your site's `_config.yml` file.
-External links will appear under all other items in the listing order.
-
 #### Example
 
 {: .no_toc }
